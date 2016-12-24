@@ -4,20 +4,19 @@ var formattedRole = HTMLheaderRole.replace("%data%", "Front-End Developer");
 $("#header").prepend(formattedRole);
 $("#header").prepend(formattedName);
 
-
 var bio = {
-	"name" : "Ralph Plumley",
-	"role" : "Front-End Developer",
-	"contacts" : {
-		"mobile" : "323.892.1422",
-		"email" : "ralphplumley@gmail.com",
-		"github" : "plumdot",
-		"twitter" : "ralphplumley",
-		"location" : "Detroit"
-	},
-	"pictureUrl" : "images/fry.jpg",
-	"welcomeMessage" : "Hello, I'm a designer based in Detroit, MI.",
-	"skills" : ["UX", "UI", "Front-End Dev"]
+    "name": "Ralph Plumley",
+    "role": "Front-End Developer",
+    "contacts": {
+        "mobile": "323.892.1422",
+        "email": "ralphplumley@gmail.com",
+        "github": "plumdot",
+        "twitter": "ralphplumley",
+        "location": "Detroit"
+    },
+    "pictureUrl": "images/fry.jpg",
+    "welcomeMessage": "Hello, I'm a designer based in Detroit, MI.",
+    "skills": ["UX", "UI", "Front-End Dev"]
 }
 
 // format and append contact information
@@ -42,103 +41,111 @@ $("#header").append(formattedWelcomeMessage);
 $("#header").append(HTMLskillsStart);
 var formattedSkills;
 
-$.each(bio.skills, function(i){
-	//console.log(bio.skills[i]);
-	formattedSkills = HTMLskills.replace("%data%", bio.skills[i]);
-	$("#skills").append(formattedSkills);
+$.each(bio.skills, function(i) {
+    // console.log(bio.skills[i]);
+    formattedSkills = HTMLskills.replace("%data%", bio.skills[i]);
+    $("#skills").append(formattedSkills);
 });
 
-// append work experience
-// var HTMLworkStart = '<div class="work-entry"></div>';
-// var HTMLworkEmployer = '<a href="#">%data%';
-// var HTMLworkTitle = ' - %data%</a>';
-// var HTMLworkDates = '<div class="date-text">%data%</div>';
-// var HTMLworkLocation = '<div class="location-text">%data%</div>';
-// var HTMLworkDescription = '<p><br>%data%</p>';
-
-// jobs: array of objects with
-//            employer: string 
-//            title: string 
-//            location: string 
-//            dates: string (works with a hyphen between them)
-//            description: string 
-//       display: function taking no parameters
-
+// my work JSON
 var work = {
-    "jobs": [
- 		{
- 			"job1" : {
- 				"employer": "RIIS",
-            	"title": "Sr. UX Designer",
-           		"location": "Detroit",
-           		"dates": "08/2016 - current",
-           		"description": "UI / UX design and research for Blue Cross Blue Shield."
- 			}
- 		},
- 		{
- 			"job2" : {
- 				"employer": "MRM // McCann",
-            	"title": "UX Architect",
-           		"location": "Detroit",
-           		"dates": "04/2014 - 08/2016",
-           		"description": "UI / UX design and research for General Motors' web and mobile UX team."
- 			}
- 		},
- 		{
- 			"job3" : {
- 				"employer": "General Motors",
-            	"title": "Interaction Designer",
-           		"location": "Detroit",
-           		"dates": "06/2012 - 04/2014",
-           		"description": "UI / UX design and research for General Motors' in-vehicle UX team."
- 			}
- 		},
- 		{
- 			"job4" : {
- 				"employer": "Grey NYC",
-            	"title": "Digital Designer",
-           		"location": "NYC",
-           		"dates": "05/2008 - 06/2012",
-           		"description": "Design and development in HTML / CSS / JS ... and ActionScript! (YA FLASH BANNERS! ;_;)"
- 			}
- 		}
-    ]
+    "jobs": [{
+        "employer": "RIIS",
+        "title": "Sr. UX Designer",
+        "location": "Detroit",
+        "dates": "08/2016 - current",
+        "description": "UI / UX design and research for Blue Cross Blue Shield."
+    }, {
+        "employer": "MRM // McCann",
+        "title": "UX Architect",
+        "location": "Detroit",
+        "dates": "04/2014 - 08/2016",
+        "description": "UI / UX design and research for General Motors' web and mobile UX team."
+    }, {
+        "employer": "General Motors",
+        "title": "Interaction Designer",
+        "location": "Detroit",
+        "dates": "06/2012 - 04/2014",
+        "description": "UI / UX design and research for General Motors' in-vehicle UX team."
+    }, {
+        "employer": "Grey NYC",
+        "title": "Digital Designer",
+        "location": "NYC",
+        "dates": "05/2008 - 06/2012",
+        "description": "Design and development in HTML / CSS / JS ... and ActionScript! (YA FLASH BANNERS! ;_;)"
+    }]
 };
 
-// var formattedWorkStart = HTMLwelcomeMsg.replace("%data%", bio.welcomeMessage);
-// var formattedWorkEmployer = HTMLwelcomeMsg.replace("%data%", bio.welcomeMessage);
-// var formattedWorkTitle = HTMLwelcomeMsg.replace("%data%", bio.welcomeMessage);
-// var formattedWorkDates = HTMLwelcomeMsg.replace("%data%", bio.welcomeMessage);
-// var formattedWorkLocation = HTMLwelcomeMsg.replace("%data%", bio.welcomeMessage);
-// var formattedWorkDescription = HTMLwelcomeMsg.replace("%data%", bio.welcomeMessage);
+// Work
+work.display = function() {
+    'use strict';
+    var i = 0,
+        a;
+    $("#workExperience").append("<div id=\"work-foldable-content\"></div>");
+    for (i = 0; i < work.jobs.length; i++) {
+        //console.log(work.jobs[i].employer);
+        $("#work-foldable-content").append(HTMLworkStart);
+        a = HTMLworkDates.replace("%data%", work.jobs[i].dates);
+        $(".work-entry:last").append(a);
+        a = HTMLworkLocation.replace("%data%", work.jobs[i].location);
+        $(".work-entry:last").append(a);
+        a = HTMLworkEmployer.replace("%data%", work.jobs[i].employer);
+        $(".work-entry:last").append(a);
+        a = HTMLworkTitle.replace("%data%", work.jobs[i].title);
+        $(".work-entry:last").append(a);
+        a = HTMLworkDescription.replace("%data%", work.jobs[i].description);
+        $(".work-entry:last").append(a);
+    }
+};
 
-// var formattedWorkStart = HTMLwelcomeMsg.replace("%data%", bio.welcomeMessage);
-// var formattedWorkEmployer = HTMLwelcomeMsg.replace("%data%", bio.welcomeMessage);
-// var formattedWorkTitle = HTMLwelcomeMsg.replace("%data%", bio.welcomeMessage);
-// var formattedWorkDates = HTMLwelcomeMsg.replace("%data%", bio.welcomeMessage);
-// var formattedWorkLocation = HTMLwelcomeMsg.replace("%data%", bio.welcomeMessage);
-// var formattedWorkDescription = HTMLwelcomeMsg.replace("%data%", bio.welcomeMessage);
+work.display();
 
-// $("#workExperience").append(formattedWelcomeMessage);
-$.each(work.jobs, function(i){
-	// console.log(work.jobs[i]);
-	formattedSkills = HTMLskills.replace("%data%", bio.skills[i]);
-	$("#skills").append(formattedSkills);
-});
+// Projects
 
+var projects = {
+	"projects": [
+		{
+			"title": "title",
+			"datesWorked": "January 1900 - January 2017",
+			"description": "lorem description",
+			"images": ["images/image.jpg"],
+			"url": "url"
+		},
+		{
+			"title": "title",
+			"datesWorked": "January 1900 - January 2017",
+			"description": "lorem description",
+			"images": ["images/image.jpg"],
+			"url": "url"
+		},
+		{
+			"title": "title",
+			"datesWorked": "January 1900 - January 2017",
+			"description": "lorem description",
+			"images": ["images/image.jpg"],
+			"url": "url"
+		}
+	]
+};
 
+projects.display = function() {
+    if (projects.projects.length > 0) {
+        for (i = 0; i < work.jobs.length; i++) {
+            $("#projects").append(HTMLprojectStart);
 
+            var formattedProjectTitle = HTMLprojectTitle.replace("%data%", projects.projects[i].title).replace("#", projects.projects[i].url);
+            var formattedProjectDates = HTMLprojectDates.replace("%data%", projects.projects[i].datesWorked);
+            var formattedProjectDescription = HTMLprojectDescription.replace("%data%", projects.projects[i].description);
 
+            $(".project-entry:last").append(formattedProjectTitle);
+            $(".project-entry:last").append(formattedProjectDates);
+            $(".project-entry:last").append(formattedProjectDescription);
 
-// var work ={};
-// work.position = "Sr. UX Designer";
-// work.employer = "RIIS / BCBSM";
-// work.years = "8";
+            for (img in projects.projects[i].images) {
+                var formattedProjectImage = HTMLprojectImage.replace("%data%", projects.projects[i].images[img]);
+                $(".project-entry:last").append(formattedProjectImage);
+            }
+        }
+    }
+}
 
-// var education = {};
-// education["name"] = "College for Creative Studies";
-// education["years"] = "2005 - 2008";
-// education["city"] = "Detroit, MI., United States";
-
-// // $("#main").append(work["position"]);
-// // $("#main").append(education.name);
