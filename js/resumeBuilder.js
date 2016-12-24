@@ -108,21 +108,21 @@ var projects = {
 			"title": "title",
 			"datesWorked": "January 1900 - January 2017",
 			"description": "lorem description",
-			"images": ["images/image.jpg"],
+			"images": ["images/197x148.gif"],
 			"url": "url"
 		},
 		{
 			"title": "title",
 			"datesWorked": "January 1900 - January 2017",
 			"description": "lorem description",
-			"images": ["images/image.jpg"],
+			"images": ["images/197x148.gif"],
 			"url": "url"
 		},
 		{
 			"title": "title",
 			"datesWorked": "January 1900 - January 2017",
 			"description": "lorem description",
-			"images": ["images/image.jpg"],
+			"images": ["images/197x148.gif"],
 			"url": "url"
 		}
 	]
@@ -130,7 +130,7 @@ var projects = {
 
 projects.display = function() {
     if (projects.projects.length > 0) {
-        for (i = 0; i < work.jobs.length; i++) {
+        for (i = 0; i < projects.projects.length; i++) {
             $("#projects").append(HTMLprojectStart);
 
             var formattedProjectTitle = HTMLprojectTitle.replace("%data%", projects.projects[i].title).replace("#", projects.projects[i].url);
@@ -149,3 +149,63 @@ projects.display = function() {
     }
 }
 
+projects.display();
+
+// education
+var education = {
+	"schools": [
+		{ "name": "College for Creative Studies",
+			"datesAttended": "2005 - 2008",
+			"location": "Detroit, MI",
+			"degree": "BFA",
+			"major": "Digital Media, Web Development, Film"
+		}		
+	],
+	"onlineCourses": [
+		{ "school": "Udacity",
+			"title": "Front-End Nanodegree",
+			"completed": "2017",
+			"url": "https://www.udacity.com/course/front-end-web-developer-nanodegree--nd001"
+		},
+		{ "school": "Udacity",
+			"title": "Full-Stack Nanodegree",
+			"completed": "2017",
+			"url": "https://www.udacity.com/course/full-stack-web-developer-nanodegree--nd004"
+		}
+	]
+};
+
+education.display = function() {
+	if(education.schools.length > 0 || education.onlineCourses.length > 0) {
+		for (i = 0; i < education.schools.length; i++) {
+			$("#education").append(HTMLschoolStart);
+
+			var formattedSchoolName = HTMLschoolName.replace("%data%", education.schools[i].name).replace("#", education.schools[i].url);
+			var formattedSchoolDegree = HTMLschoolDegree.replace("%data%", education.schools[i].degree);
+			var formattedSchoolDates = HTMLschoolDates.replace("%data%", education.schools[i].datesAttended);
+			var formattedSchoolLocation = HTMLschoolLocation.replace("%data%", education.schools[i].location);			
+
+			$(".education-entry:last").append(formattedSchoolName + formattedSchoolDegree);
+			$(".education-entry:last").append(formattedSchoolDates);
+			$(".education-entry:last").append(formattedSchoolLocation);
+		}
+
+		if(education.onlineCourses.length > 0) {
+			$("#education").append(HTMLonlineClasses);
+			for (i = 0; i < education.onlineCourses.length; i++) {
+				$("#education").append(HTMLschoolStart);
+				var formattedOnlineTitle = HTMLonlineTitle.replace("%data%", education.onlineCourses[i].title).replace("#", education.onlineCourses[i].url);
+				var formattedOnlineSchool = HTMLonlineSchool.replace("%data%", education.onlineCourses[i].school);
+				var formattedOnlineDates = HTMLonlineDates.replace("%data%", education.onlineCourses[i].completed);
+				var formattedOnlineURL = HTMLonlineURL.replace("%data%", education.onlineCourses[i].url).replace("#", education.onlineCourses[i].url);
+
+				$(".education-entry:last").append(formattedOnlineTitle + formattedOnlineSchool);
+				$(".education-entry:last").append(formattedOnlineDates);
+				$(".education-entry:last").append(formattedOnlineURL);
+			}
+		}
+		
+	}
+}
+
+education.display();
